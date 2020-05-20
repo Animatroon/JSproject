@@ -4,10 +4,20 @@
     box-sizing: border-box;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+.main_title {
+    font-size: 40px;
+    margin: 10px;
+}
+
 body {
-    background-color: #192B32;
-    color:#fff;
-    font-size: 16px;
+    background-color: #5EED06;
+    color:#000;
+    font-size: 18px;
 }
 p {
     line-height: 1.35;
@@ -22,6 +32,7 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 30px;
 }
 .link {
     text-decoration: none;
@@ -29,6 +40,14 @@ p {
     color: #fff;
     font-size: 16px;
     transition: all 0.2s linear;
+}
+.text_links {
+    display: flex;
+    width: 100%;
+    width: 300px;
+    margin-bottom: 40px;
+    align-items: start;
+    justify-content: space-between;
 }
 .link:hover {
     color:darkred;
