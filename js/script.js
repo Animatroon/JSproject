@@ -1,23 +1,21 @@
 'use strict';
 
-function first() {
-    setTimeout(function() {   
-        console.log(56);
-    }, 500);
-    
-}
+const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
 
-function second() {
-    console.log(9);
-}
+const personalMovieDB = {
+    count: numberOfFilms,
+    movies: {},
+    actors: {},
+    genres: [],
+    privat: false
+};
 
-function three() {
-    let textSkaz = "В визуал студио коуде управлять плагинами и раширениями легче всего. Оно увляется гибким и удобной вещю";
-    console.log(textSkaz);
-}
+const a = prompt('Один из последних просмотренных фильмов?', ''),
+    b = prompt('На сколько вы оцените его?', ''),
+    c = prompt('Один из последних просмотренных фильмов?', ''),
+    d = prompt('На сколько вы оцените его?', '');
 
+personalMovieDB.movies[a] = b;
+personalMovieDB.movies[c] = d;
 
-first();
-second();
-three();
-
+console.log(personalMovieDB);
