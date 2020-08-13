@@ -1,94 +1,50 @@
 'use strict';
 
-const personalMovieDB = {
-    count: 0,
-    movies: {},
-    actors: {},
-    genres: [],
-    privat: false,
-    start: function() {
-        personalMovieDB.count = +prompt('Сколько фильмов вы уже посмотрели?', '');
+const box = document.getElementById('box'),
+      btns = document.getElementsByTagName("button"),
+      circle = document.getElementsByClassName("circle"),
+      hearts = document.querySelectorAll(".heart"),
+      oneHeart = document.querySelector(".heart"),
+      wrapper = document.querySelector('.wrapper');
 
-        while (personalMovieDB.count == '' || personalMovieDB.count == null || isNaN(personalMovieDB.count)) {
-            personalMovieDB.count = +prompt('Сколько фильмов вы уже посмотрели?', '');
-        }
-    },
-    rememberMyFilms: function() {
-        for (let i = 0; i < 2; i++) {
-            const a = prompt('Один из последних просмотренных фильмов?', ''),
-                b = prompt('На сколько вы оцените его?', '');
+// box.style.backgroundColor = 'blue';
+// box.style.width = '500px';
 
-            if (a != null && b != null && a != '' && b != '' && a.length < 50) {
-                personalMovieDB.movies[a] = b;
+box.style.cssText = 'background-color: blue; width: 500px';
 
-                console.log('Норм');
-            } else {
-                console.log('error');
-                i--;
-            }
-        }
-    },
-    detectPersonalLevel: function() {
-        if (personalMovieDB.count < 10) {
-            console.log("Вы посмотрели довольно мало фильмов");
-        } else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
-            console.log("Вы типичнейший зритель");
-        } else if (personalMovieDB.count >= 30) {
-            console.log("Вы киноман");
-        } else {
-            console.log("Произошла ошибка");
-        }
+btns[1].style.borderRadius = '50%';
+circle[0].style.backgroundColor = 'red'; // Индексы псевдомассивов прописать обязательно 
 
-    },
-    showMyDB: function(hidden) {
-        if (!hidden) {
-            console.log(personalMovieDB);
-        }
+// for (let i = 0; i < hearts.length; i++) {
+//     hearts[i].style.backgroundColor = 'gray';
+// }
 
-    },
-    toggleVisibleMyDB: function () {
-        if (personalMovieDB.privat) {
-            personalMovieDB.privat = false;
-        } else {
-            personalMovieDB.privat = true;
-        }
-    },
-    WriteYourGeneres: function() {
-        // for (let i = 1; i <= 3; i++) {
-            
-        //     let genre = prompt(`Ваш любимый жанр под номером ${i}`);
+hearts.forEach(item => {
+    item.style.backgroundColor = 'gray';
+});
 
-        //     if (genre === '' || genre === null) {
-        //         console.log("Вы не ввели данные или ввели их некорректно");
-        //         i--;
-        //     } else {
-        //         personalMovieDB.genres[i - 1] = genre;
-        //     }
-        // }
-        for (let i = 1; i < 2; i++) {
+const div = document.createElement('div');
 
-            let genres = prompt(`Введите наши любимые жанры через запятую`).toLowerCase();
+div.classList.add('black');
 
-            if (genres === '' || genres === null) {
-                console.log("Вы не ввели данные или ввели их некорректно");
-                i--;
-            } else {
-                personalMovieDB.genres = genres.split(', ');
-                personalMovieDB.genres.sort();
-            }
-        }
-        
-        personalMovieDB.genres.forEach((item, i) => {
-            console.log(`Любимый жанр номер ${i + 1} - это ${item}`);
-        });
-    }
+wrapper.append(div); // Этот код append вставляет в конец родительского кода. Тут родительский код wrapper
+// wrapper.appendChild(div);
 
-};
+// wrapper.prepend(div); // Этот код prepend вставляет код в самое начало родительского кода
 
+// hearts[0].before(div); // Этот код вставляет код перед заданным кодом
+// wrapper.insertBefore(div, hearts[0]); // То же самое что и before, но тут вставится внутри псевдомассива
 
+// hearts[0].after(div); // Этот код вставляет код после задданого кода
 
+// circle[0].remove(); // Этот код удалят заданный элемент
+// wrapper.removeChild(hearts[1]); // Старый способ удаления элемента
 
+// hearts[0].replaceWith(circle[0]); // Заменяет собой другой элемент
+// wrapper.replaceChild(circle[0], hearts[0]); // Старый способ замены элемаента
 
+div.innerHTML = "<h1>Hello world !</h1>"; // Даёт возможность ставить HTML структуры в элемент
 
+// div.textContent = 'hello'; // Ставляет в элементы текст
 
-
+div.insertAdjacentHTML('afterbegin', '<h2>Hello babe</h2>'); // Вставляет элемент который там же пишется. Есть четыре вариантов: beforebegin(перед началом, по есть в до начала самого заданного элемента), beforeand(после конца, то есть перед самым концом), afterbegin(после начала, то есть в начале заданного элемента), afterend(после конца, то есть после того как заданный элемент закончился)
