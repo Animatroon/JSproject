@@ -1,123 +1,42 @@
-/* Задания на урок:
+window.addEventListener('DOMContentLoaded', () =>{
 
-1) Удалить все рекламные блоки со страницы (правая часть сайта)
+    const tabs = document.querySelectorAll('.tabheader__item'),
+          tabsContent = document.querySelectorAll('.tabcontent'),
+          tabsParent = document.querySelector('.tabheader__items');
+          
+    function hideTabContent() {
+        tabsContent.forEach(item => {
+            item.classList.add('hide');
+            item.classList.remove('show');
+        });
 
-2) Изменить жанр фильма, поменять "комедия" на "драма"
+        tabs.forEach(item => {
+            item.classList.remove('tabheader__item_active');
+        });
+    }
 
-3) Изменить задний фон постера с фильмом на изображение "bg.jpg". Оно лежит в папке img.
-Реализовать только при помощи JS
+    function showTabContent(i = 0) {
+        tabsContent[i].classList.add('show', 'fade');
+        tabsContent[i].classList.remove('hide');
+        tabs[i].classList.add('tabheader__item_active');
 
-4) Список фильмов на странице сформировать на основании данных из этого JS файла.
-Отсортировать их по алфавиту 
+    }
 
-5) Добавить нумерацию выведенных фильмов */
+    hideTabContent();
+    showTabContent();
+    
+    tabsParent.addEventListener('click', (event) => {
+        const target = event.target;
 
-'use strict';
-
-document.addEventListener('DOMContentLoaded', () => {
-  
-    const movieDB = {
-        movies: [
-            "Логан",
-            "Лига справедливости",
-            "Ла-ла лэнд",
-            "Одержимость",
-            "Скотт Пилигрим против...",
-
-        ]
-    };
-
-    const adv = document.querySelectorAll(".promo__adv img"),
-        poster = document.querySelector(".promo__bg"),
-        promoGenre = document.querySelector('.promo__genre'),
-        movieList = document.querySelector('.promo__interactive-list'),
-        addForm = document.querySelector('form.add'),
-        addInput = document.querySelector('.adding__input'),
-        checkbox = addForm.querySelector('[type="checkbox"]');
-        
-
-    addForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        let newFilm = addInput.value;
-        const favorite = checkbox.checked;
-
-        if (newFilm) {
-
-            if (newFilm.length > 21) {
-                newFilm = `${newFilm.substring(0, 22)}...`;
-            }
-
-            if (favorite) {
-                console.log('Добавляем любимый фильм');
-            }
-            movieDB.movies.push(newFilm);
-            sortArr(movieDB.movies);
-
-            CreateMovieList(movieDB.movies, movieList);
+        if (target && target.classList.contains('tabheader__item')) {
+            tabs.forEach((item, i) => {
+                if (target == item) {
+                    hideTabContent();
+                    showTabContent(i);
+                }
+            });
         }
-
-        
-        event.target.reset();
-
     });
-
-    const deleteAdv = (arr) => {
-            arr.forEach(item => {
-                item.remove();
-            });
-    };
-
-
-    const makeChanges = () => {
-        promoGenre.textContent = 'Драма';
-
-        poster.style.cssText = "background-image: url(../img/bg.jpg)";
-    };
-
-
-    const sortArr = (arr) => {
-            arr.sort();
-    };
-
-
-    function CreateMovieList(films, parent) {
-
-        parent.innerHTML = '';
-        
-        sortArr(films);
-
-
-        films.forEach((film, i) => {
-            parent.innerHTML += `
-            <li class = "promo__interactive-item" > ${ i + 1 } ${film}
-                
-            <div class="delete"> </div>
-                </li>
-        `;
-        });
-
-        document.querySelectorAll('.delete').forEach((btn, i ) => {
-            btn.addEventListener('click', () => {
-                btn.parentElement.remove();
-                movieDB.movies.splice(i,1);
-
-                CreateMovieList(films, parent);
-
-            });
-        });
-    }  
-
-    deleteAdv(adv);
-    CreateMovieList(movieDB.movies, movieList);
-    makeChanges();
 });
-
-
-
-
-
-
-
 
 
